@@ -22,8 +22,7 @@ import Distribution.Simple.Setup ( BuildFlags, ConfigFlags
                                  , InstallFlags, installVerbosity
                                  , fromFlag, fromFlagOrDefault, copyDest
                                  )
-import Distribution.Simple.Utils ( die
-                                 , installOrdinaryFile
+import Distribution.Simple.Utils ( installOrdinaryFile
                                  , IOData(..)
                                  , IODataMode(..)
                                  , rawSystemExitWithEnv
@@ -37,7 +36,7 @@ import System.Directory ( createDirectoryIfMissing, doesFileExist
                         , getDirectoryContents,     getModificationTime
                         )
 import System.Environment (lookupEnv, getEnvironment)
-import System.Exit (ExitCode (..), exitFailure)
+import System.Exit (ExitCode (..), die, exitFailure)
 import System.FilePath ((</>), (<.>), replaceExtension, takeFileName, dropFileName, addExtension, takeDirectory)
 import System.IO (hPutStrLn, readFile, stderr)
 import System.IO.Error (isDoesNotExistError)
