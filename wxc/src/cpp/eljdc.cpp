@@ -735,7 +735,7 @@ EWXWEXPORT(void,wxDC_DrawPolyPolygon)(wxDC* self,int n,int* count,void* x,void* 
 	self->DrawPolyPolygon(n, cnt, lst, (wxCoord)xoffset, (wxCoord)yoffset, _fillStyle);
 	
 	free (lst);
-    delete cnt;
+    delete[] cnt;
 }
 #endif
 }
