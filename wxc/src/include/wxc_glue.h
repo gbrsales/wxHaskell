@@ -2932,7 +2932,11 @@ void       wxGrid_DrawCellBorder( TSelf(wxGrid) _obj, TClass(wxDC) dc, int _row,
 void       wxGrid_DrawCellHighlight( TSelf(wxGrid) _obj, TClass(wxDC) dc, TClass(wxGridCellAttr) attr );
 void       wxGrid_DrawColLabel( TSelf(wxGrid) _obj, TClass(wxDC) dc, int col );
 void       wxGrid_DrawColLabels( TSelf(wxGrid) _obj, TClass(wxDC) dc );
+#if (wxVERSION_NUMBER >= 3100)
+void       wxGrid_DrawGridSpace( TSelf(wxGrid) _obj, TClass(wxDC) dc, int _row, int _col );
+#else
 void       wxGrid_DrawGridSpace( TSelf(wxGrid) _obj, TClass(wxDC) dc );
+#endif
 void       wxGrid_DrawRowLabel( TSelf(wxGrid) _obj, TClass(wxDC) dc, int row );
 void       wxGrid_DrawRowLabels( TSelf(wxGrid) _obj, TClass(wxDC) dc );
 void       wxGrid_DrawTextRectangle( TSelf(wxGrid) _obj, TClass(wxDC) dc, TClass(wxString) txt, TRect(x,y,w,h), int horizontalAlignment, int verticalAlignment );
@@ -4450,11 +4454,6 @@ void       wxPrintData_SetPrinterTranslateX( TSelf(wxPrintData) _obj, int x );
 void       wxPrintData_SetPrinterTranslateY( TSelf(wxPrintData) _obj, int y );
 void       wxPrintData_SetPrinterTranslation( TSelf(wxPrintData) _obj, TPoint(x,y) );
 void       wxPrintData_SetQuality( TSelf(wxPrintData) _obj, int quality );
-
-/* wxPostScriptPrintNativeData */
-TClassDefExtend(wxPostScriptPrintNativeData,wxObject)
-TClass(wxPostScriptPrintNativeData) wxPostScriptPrintNativeData_Create(  );
-void       wxPostScriptPrintNativeData_Delete( TSelf(wxPostScriptPrintNativeData) _obj );
 
 /* wxPrintDialog */
 TClassDefExtend(wxPrintDialog,wxDialog)

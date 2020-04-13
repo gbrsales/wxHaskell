@@ -321,22 +321,6 @@ EWXWEXPORT(void,wxPrintData_Delete)(wxPrintData* self)
 	delete self;
 }
 
-EWXWEXPORT(void*,wxPostScriptPrintNativeData_Create)()
-{
-#ifdef wxUSE_POSTSCRIPT
-	return (void*)new wxPostScriptPrintNativeData();
-#else
-	return NULL;
-#endif
-}
-
-EWXWEXPORT(void,wxPostScriptPrintNativeData_Delete)(void* self)
-{
-#ifdef wxUSE_POSTSCRIPT
-	delete (wxPostScriptPrintNativeData*)self;
-#endif
-}
-
 EWXWEXPORT(int,wxPrintData_GetNoCopies)(wxPrintData* self)
 {
 	return self->GetNoCopies();
