@@ -1019,14 +1019,20 @@ sizerFromLayout parent layout
            return container'
       where
         addPage (title,WidgetContainer _options win' layout')
-          = do pagetitle <- if (null title)
-                               then windowGetLabel win'
-                               else return title
+          = do pagetitle <- getTitle title win'
                _ <- simplebookAddPage sbook' win' pagetitle False
                windowSetLayout win' layout'  -- recursively set layout'
 
+        addPage (title,Widget _options win')
+          = do pagetitle <- getTitle title win'
+               _ <- simplebookAddPage sbook' win' pagetitle False
+               return ()
+
         addPage (_title, _other)
-          = error "Graphics.UI.WXCore.sizerFromLayout: simplebook page needs to be a 'container' layout!"
+          = error "Graphics.UI.WXCore.sizerFromLayout: simplebook page needs to be a 'container' or 'widget' layout!"
+
+        getTitle ""    = windowGetLabel
+        getTitle title = const (return title)
 
 
     stretchRow g (i,stretch')
