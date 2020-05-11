@@ -540,6 +540,7 @@ int        ELJApp_SafeYield( TClass(wxWindow) _win );
 /* int        ELJApp_SendIdleEvents(  ); */
 /* int        ELJApp_SendIdleEventsToWindow( TClass(wxWindow) win ); */
 void       ELJApp_SetAppName( TClass(wxString) name );
+void       ELJApp_SetAppDisplayName( TClass(wxString) name );
 void       ELJApp_SetClassName( TClass(wxString) name );
 void       ELJApp_SetExitOnFrameDelete( int flag );
 void       ELJApp_SetPrintMode( int mode );

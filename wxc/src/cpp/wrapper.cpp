@@ -362,6 +362,11 @@ EWXWEXPORT(void,ELJApp_SetAppName)(wxString* name)
         wxGetApp().SetAppName(*name);
 }
 
+EWXWEXPORT(void,ELJApp_SetAppDisplayName)(wxString* name)
+{
+        wxGetApp().SetAppDisplayName(*name);
+}
+
 EWXWEXPORT(wxString*,ELJApp_GetClassName)()
 {
 	wxString *result = new wxString();
