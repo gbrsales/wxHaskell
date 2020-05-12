@@ -1,4 +1,5 @@
 #include "wrapper.h"
+#include "wxc.h"
 
 extern int APPTerminating;
 
@@ -22,7 +23,7 @@ extern int APPTerminating;
 
 extern "C"
 {
-EWXWEXPORT(void, ELJApp_InitializeC) (wxClosure* closure, int _argc, char** _argv)
+EWXWEXPORT(void, ELJApp_InitializeC) (wxClosure* closure, int _argc, TChar** _argv)
 {
   wxHANDLE wxhInstance = GetModuleHandle(NULL);
 
@@ -92,23 +93,28 @@ EWXWEXPORT(void, ELJApp_initialize)(void* _obj, AppInitFunc _func, char* _cmd, v
 
 #if !wxCHECK_VERSION(2,5,0)
 #ifdef __WXMAC__ /* declare wxEntry explicitly as wxMAC seems to leave it out? */
-void wxEntry( int argc, char** argv, bool enterLoop = true );
+void wxEntry( int argc, TChar** argv, bool enterLoop = true );
 #endif
 #ifdef __WXGTK__ /* declare explicitly or we get link errors? */
-int wxEntry( int argc, char** argv );
+int wxEntry( int argc, TChar** argv );
 #endif
 #endif
 extern "C"
 {
 
-EWXWEXPORT(void, ELJApp_InitializeC) (wxClosure* closure, int _argc, char** _argv)
+EWXWEXPORT(void, ELJApp_InitializeC) (wxClosure* closure, int _argc, TChar** _argv)
 {
-  char* args[] = { "wxc", NULL };
+  const TChar* args[] =
+#ifdef wxUSE_UNICODE
+    { L"wxc", NULL };
+#else
+    { "wxc", NULL };
+#endif
 
   initClosure = closure;
   if (_argv == NULL) {
     /* note: wxGTK crashes when argv == NULL */
-    _argv = args;
+    _argv = const_cast<TChar**>(args);
     _argc = 1;
   }
   APPTerminating = 0;
