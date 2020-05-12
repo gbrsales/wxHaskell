@@ -56,13 +56,8 @@ EWXWEXPORT(void, ELJApp_InitializeC) (wxClosure* closure, int _argc, char** _arg
   else {
     wxEntry(wxhInstance, NULL, (_argc > 0 ? _argv[0] : NULL), SW_SHOWNORMAL);
   }
-  
-  APPTerminating = 1;
 
-  /* wxPendingEvents is deleted but not set to NULL -> disaster when restarted from an interpreter */
-#if !defined(WXMAKINGDLL) && !defined(WXUSINGDLL)
-  wxPendingEvents = NULL;
-#endif
+  APPTerminating = 1;
 
 #if defined(wxUSE_ODBC) && (wxUSE_ODBC != 0)
   wxDbCloseConnections();
@@ -89,10 +84,6 @@ EWXWEXPORT(void, ELJApp_initialize)(void* _obj, AppInitFunc _func, char* _cmd, v
   APPTerminating = 0;
   wxEntry(wxhInstance, NULL, _cmd, SW_SHOWNORMAL);
   APPTerminating = 1;
-  /* wxPendingEvents is deleted but not set to NULL -> disaster when restarted from an interpreter */
-#if !defined(WXMAKINGDLL) && !defined(WXUSINGDLL)
-  wxPendingEvents = NULL;
-#endif
 }
 
 }
@@ -123,10 +114,6 @@ EWXWEXPORT(void, ELJApp_InitializeC) (wxClosure* closure, int _argc, char** _arg
   APPTerminating = 0;
   wxEntry(_argc,_argv);
   APPTerminating = 1;
-  /* wxPendingEvents is deleted but not set to NULL -> disaster when restarted from an interpreter */
-#if !defined(WXMAKINGDLL) && !defined(WXUSINGDLL)
-  wxPendingEvents = NULL;
-#endif
 }
 
 EWXWEXPORT(void, ELJApp_initialize) (void* _obj, AppInitFunc _func, int _argc, void* _argv)
@@ -134,10 +121,6 @@ EWXWEXPORT(void, ELJApp_initialize) (void* _obj, AppInitFunc _func, int _argc, v
   APPTerminating = 0;
   wxEntry(_argc, (char**)_argv);
   APPTerminating = 1;
-  /* wxPendingEvents is deleted but not set to NULL -> disaster when restarted from an interpreter */
-#if !defined(WXMAKINGDLL) && !defined(WXUSINGDLL)
-  wxPendingEvents = NULL;
-#endif
 }
 
 }
