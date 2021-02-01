@@ -87,7 +87,7 @@ rawShellSystemStdInOut :: Verbosity                     -- Verbosity level
                        -> IO (String, String, ExitCode) -- (Command result, Errors, Command exit status)
 rawShellSystemStdInOut v f as =
     rawSystemStdInOut v "sh" (f:as) Nothing Nothing Nothing IODataModeText >>=
-    \(IODataText result, errors, exitStatus) -> return (result, errors, exitStatus)
+    \(result, errors, exitStatus) -> return (result, errors, exitStatus)
 
 isWindowsMsys :: IO Bool
 isWindowsMsys = (buildOS == Windows&&) . isJust <$> lookupEnv "MSYSTEM"
@@ -443,7 +443,7 @@ deMsysPaths bi = do
     if b
     then do
         let cor ph = do
-            (IODataText r, e, c ) <- rawSystemStdInOut normal "sh" ["-c", "cd " ++ ph ++ "; pwd -W"] Nothing Nothing Nothing IODataModeText
+            (r, e, c ) <- rawSystemStdInOut normal "sh" ["-c", "cd " ++ ph ++ "; pwd -W"] Nothing Nothing Nothing IODataModeText
             unless (c == ExitSuccess) (putStrLn ("Error: failed to convert MSYS path to native path \n" ++ e) >> exitFailure)
             return . head . lines $ r
         elds  <- mapM cor (extraLibDirs bi)
